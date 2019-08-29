@@ -8,10 +8,17 @@
 The simple_shell can read commands from the terminal or a file, interpret them and execute them accordingly. You can pass commands to it interchangably via ineractive and non-interactive mode.
 .SH EXAMPLES
 .B non-interactive 
+input: $ echo "bin/ls" | ./hsh
+output: hsh main.c shell.c
 .B interactive
+input: ($) /bin/ls
+output: hsh main.c shell.c
+.SH BUILT-IN
+.B exit - exit program
+.B env -  
 .SH SEE ALSO
 sh(1) or dash(1)
 .SH BUGS
-Still seraching for them.
+Still searching for them.
 .SH AUTHOR
 Hiram C Velez, John F Knight
