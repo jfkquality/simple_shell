@@ -20,5 +20,6 @@ void _printenv(char **env);
 char **make_arr(ssize_t read, char *line);
 void check_input(ssize_t read, char *line);
 char *_getenv(char **env, char *evar);
+extern int errno;
 
 #endif
