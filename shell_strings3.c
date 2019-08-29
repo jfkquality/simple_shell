@@ -79,7 +79,7 @@ char *_strncpy(char *dest, char *src, size_t n)
 {
 	char *dest2 = dest;
 	char *src2 = src;
-	int i = 0;
+	unsigned int i = 0;
 
 	for (i = 0; i < n && *src2 != '\0'; i++, src2++, dest2++)
 		*dest2 = *src2;
