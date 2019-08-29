@@ -12,11 +12,11 @@
 /* ssize_t _getline(char **lineptr, size_t *n, FILE *stream); */
 ssize_t _getline(char *buff);
 int getlen(char *s);
-void type_prompt();
+void type_prompt(void);
 void sigintHandler(int signum);
 void _execute(char *line, char **args, char **envp);
 void _env(char **env);
-int _printenv(char **env);
+void _printenv(char **env);
 char **make_arr(ssize_t read, char *line);
 void check_input(ssize_t read, char *line);
 char *_getenv(char **env, char *evar);

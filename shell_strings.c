@@ -62,7 +62,7 @@ char *_strdup(char *str)
  * @n: int characters to concatenate
  * Return: dest.
  */
-char *_strncat(char *dest, char *src, int n)
+char *_strncat(char *dest, char *src, size_t n)
 {
 	char *dest2 = dest;
 	char *src2 = src;

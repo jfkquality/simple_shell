@@ -75,7 +75,7 @@ char *_strcpy(char *dest, char *src)
  * @n: int chars to copy
  * Return: dest.
  */
-char *_strncpy(char *dest, char *src, int n)
+char *_strncpy(char *dest, char *src, size_t n)
 {
 	char *dest2 = dest;
 	char *src2 = src;
