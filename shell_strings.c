@@ -66,7 +66,7 @@ char *_strncat(char *dest, char *src, size_t n)
 {
 	char *dest2 = dest;
 	char *src2 = src;
-	int i = 0;
+	unsigned int i = 0;
 
 	for (; *dest2 != '\0'; dest2++)
 		;
