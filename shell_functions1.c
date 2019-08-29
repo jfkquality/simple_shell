@@ -1,4 +1,4 @@
-#include "shell_functions.h"
+include "shell_functions.h"
 #include "shell_strings.h"
 
 /**
@@ -73,7 +73,7 @@ char **make_arr(ssize_t read, char *line)
 	token = strtok(line, " \n");
 	if (!token)
 		return (0);
-	arr = malloc(read * sizeof(char *));
+	arr = malloc(read/2 * sizeof(char *));
 	if (arr == NULL)
 	{
 		free(line);
