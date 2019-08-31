@@ -25,6 +25,7 @@ char *_path(char **env);
 char *isbuiltin(char **args, char **builtins, ssize_t builtslen);
 void builtin(char *pgm);
 void _readfile(char *file);
+char **parsepath(char **env);
 
 extern int errno;
 

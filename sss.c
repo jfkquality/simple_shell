@@ -9,7 +9,6 @@
  *
  * Return: nothing
  */
-
 int main(int ac, char **av, char **env)
 {
 	FILE *fp;
@@ -17,13 +16,13 @@ int main(int ac, char **av, char **env)
 	char *line = NULL;
 	size_t len = 0;
 	ssize_t read;
-	char **input_args = NULL;
+	char **input_args = NULL, **args = av;
 	char *builtins[] = {
 	"exit", "env", "setenv", "unsetenv",
 	"cd", "alias", "help", "history", NULL};
 	ssize_t builtinslen = 0;
 	/* ssize_t inputslen; */
-	char **args = av;
+	/* char *builtin = NULL; */
 	(void) ac;
 
 	/* fp = STDIN_FILENO; */

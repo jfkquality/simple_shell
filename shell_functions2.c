@@ -31,7 +31,7 @@ char *isbuiltin(char **args, char **builtins, ssize_t builtslen)
 	{
 		if (_strcmp(args[0], builtins[i]) == 0)
 		{
-			return (args[0]);
+			return (builtins[i]);
 		}
 		i++;
 		/* strcat args array to create command with args */
