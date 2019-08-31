@@ -17,23 +17,19 @@ int main(int ac, char **av, char **env)
 	char *line = NULL;
 	size_t len = 0;
 	ssize_t read;
-	char *toktmp = NULL;
-	char **input_args;
+	char **input_args = NULL;
 	char *builtins[] = {
 	"exit", "env", "setenv", "unsetenv",
 	"cd", "alias", "help", "history", NULL};
 	ssize_t builtinslen = 0;
 	/* ssize_t inputslen; */
 	char **args = av;
-	(void) toktmp;
 	(void) ac;
 
 	/* fp = STDIN_FILENO; */
 	fp = stdin;
-
 	if (args[1])
 		_readfile(args[1]);
-
 	builtinslen = sizeof(builtins) / sizeof(builtins[0]);
 	while (1)
 	{

@@ -14,15 +14,8 @@ void sigintHandler(int signum)
 	type_prompt();
 	signal(SIGINT, sigintHandler);
 }
-char *_path(char **env)
-{
-	(void) env;
-	return (EXIT_SUCCESS);
-}
-
 
 /* char *_getline(char **lineptr, ssize_t *n, int stream) */
-
 /**
  * _getline - read line from stdin
  * @buff: string buffer
@@ -47,10 +40,8 @@ ssize_t _getline(char *buff)
  * check_input - check input for ctrl-d, exit
  * @read: num of characters in line
  * @line: input line
- * @args: main() arguments
- * @builtins: list of built-in cmds
  *
- * Return:
+ * Return: nothing
  */
 void check_input(ssize_t read, char *line)
 {
@@ -67,49 +58,6 @@ void check_input(ssize_t read, char *line)
 
 }
 /**
- * isbuiltin - check if arg is a built-in
- * @arg: builtin to check for
- * @builtins - list of builtins
- *
- * Return: EXIT_SUCCESS or EXIT_FAILURE
- */
-char *isbuiltin(char **args, char **builtins, ssize_t builtslen)
-{
-	int i;
-	(void) builtslen;
-
-	while(builtins[i])
-	{
-		if (_strcmp(args[0], builtins[i]) == 0)
-		{
-			return (args[0]);
-		}
-		i++;
-		/* strcat args array to create command with args */
-	}
-	return (0);
-}
-void builtin(char *pgm)
-{
-	(void) pgm;
-	printf("builtin()\n");
-}
-/**
- * _readfile()
- *
- * @arg:
- *
- * Return: success or failure
- */
-void _readfile(char *file)
-{
-	/* See lat project on file i/o */
-	/* Open file. Execute each command as is */
-	(void) file;
-	printf("_readfile()\n");
-}
-
-/**
  * make_arr - make the command args array
  * @read: number of chars in line
  * @line: input line
@@ -124,7 +72,7 @@ char **make_arr(ssize_t read, char *line)
 	token = strtok(line, " \n");
 	if (!token)
 		return (0);
-	arr = malloc(read/2 * sizeof(char *));
+	arr = malloc(read / 2 * sizeof(char *));
 	if (arr == NULL)
 	{
 		free(line);
@@ -197,9 +145,9 @@ void _execute(char *line, char **args, char **envp)
 				free(line);
 			/* if (args) */
 			/* { */
-			/* 	for (k = 0; k < sizeof(args) / sizeof(args[0]); k++) */
-			/* 		free(args[k]); */
-			/* 	free(args); */
+			/*for (k = 0; k < sizeof(args) / sizeof(args[0]); k++)*/
+			/* ree(args[k]); */
+			/* free(args); */
 			/* } */
 			exit(EXIT_FAILURE);
 		}
