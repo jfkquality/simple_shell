@@ -50,7 +50,7 @@ void builtin(char *pgm)
 	printf("builtin()\n");
 }
 /**
- * _readfile() - read a text file containing command and execute them.
+ * _readfile - read a text file containing command and execute them.
  * @file: file to read
  *
  * Return: success or failure
