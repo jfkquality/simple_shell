@@ -19,7 +19,15 @@ void _env(char **env);
 void _printenv(char **env);
 char **make_arr(ssize_t read, char *line);
 void check_input(ssize_t read, char *line);
+/* void check_input(ssize_t read, char *line, char **args, char **builtins); */
+/* void check_input(ssize_t read, char *line, char **builts, ssize_t lenbuilts); */
 char *_getenv(char **env, char *evar);
+char *_path(char **env);
+/* char *isbuiltin(char *arg, char **builtins); */
+char *isbuiltin(char **args, char **builtins, ssize_t builtslen);
+void builtin(char *pgm);
+void _readfile(char *file);
+
 extern int errno;
 
 #endif

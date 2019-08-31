@@ -19,26 +19,36 @@ int main(int ac, char **av, char **env)
 	ssize_t read;
 	char *toktmp = NULL;
 	char **input_args;
-	char *argv[] = {"/bin/ls", "-l", "/usr/", NULL};
-	(void) argv;
+	char *builtins[] = {
+	"exit", "env", "setenv", "unsetenv",
+	"cd", "alias", "help", "history", NULL};
+	ssize_t builtinslen = 0;
+	/* ssize_t inputslen; */
+	char **args = av;
 	(void) toktmp;
 	(void) ac;
-	(void) av;
 
 	/* fp = STDIN_FILENO; */
 	fp = stdin;
 
+	if (args[1])
+		_readfile(args[1]);
+
+	builtinslen = sizeof(builtins) / sizeof(builtins[0]);
 	while (1)
 	{
 		type_prompt();
 		signal(SIGINT, sigintHandler);
 		read = getline(&line, &len, fp);
+		if (read == 1)
+			continue;
 		check_input(read, line);
 		input_args = make_arr(read, line);
 		if (!input_args)
 		{
 			continue;
 		}
+		isbuiltin(input_args, builtins, builtinslen);
 		_execute(line, input_args, env);
 	}
 	free(line);
