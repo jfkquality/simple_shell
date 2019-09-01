@@ -38,7 +38,7 @@ int _getenv(char **env, char *evar)
         {
                 write (STDOUT_FILENO, "Usage ", 6);
                 write (STDOUT_FILENO, "getenv", 6);
-                write (STDOUT_FILENO, " <var-name>\n", 12);
+                write (STDOUT_FILENO, " <VAR-NAME>\n", 12);
                 return (EXIT_SUCCESS);
         }
 

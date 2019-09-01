@@ -15,16 +15,16 @@ char *_path(char **env)
 }
 
 /**
- * isbuilt - check if arg is a built-in
+ * isbuilt - check if arg is a built-in and execute it
  * @args: args arry for builtin to check for
  * @builtins: list of builtins
  * @builtslen: length of builtins array
  *
  * Return: EXIT_SUCCESS or EXIT_FAILURE
  */
-int isbuilt(char **args, char ** envp, char **builtins, ssize_t builtslen)
+int isbuilt(char **args, char **envp, char **builtins, ssize_t builtslen)
 {
-	int i;
+	int i = 0;
 	char *pgm = args[0];
 	(void) builtslen;
 
@@ -33,69 +33,68 @@ int isbuilt(char **args, char ** envp, char **builtins, ssize_t builtslen)
 		if (_strcmp(pgm, builtins[i]) == 0)
 		{
 			/* printf("\nbuilt match %s\n\n", args[0]); */
-			if (!_strcmp(pgm,"env") || !_strcmp(pgm,"printenv"))
-			{	_env(envp);
+			if (!builtcheck1(pgm, args, envp))
 				return (EXIT_SUCCESS);
-			}
-			if (!_strcmp(pgm,"getenv"))
-			{
-				_getenv(envp, args[1]);
-				return (0);
-			}
-			if (!_strcmp(pgm,"setenv"))
-			{
-				/* _setenv(); */
+			if (!builtcheck2(pgm, args, envp))
 				return (EXIT_SUCCESS);
-			}
-			if (!_strcmp(pgm,"unsetenv"))
-			{
-				/* _unsetenv(); */
-				return (EXIT_SUCCESS);
-			}
-			if (!_strcmp(pgm,"cd"))
-			{
-				/* _cd(); */
-				return (EXIT_SUCCESS);
-			}
-			if (!_strcmp(pgm,"alias"))
-			{
-				/* _alias(); */
-				return (EXIT_SUCCESS);
-			}
-			if (!_strcmp(pgm,"help"))
-			{
-				/* _help(); */
-				return (EXIT_SUCCESS);
-			}
-			if (!_strcmp(pgm,"history"))
-			{
-				/* _history(); */
-				return (EXIT_SUCCESS);
-			}
-			/* return (EXIT_FAILURE); */
 		}
 		i++;
-		/* strcat args array to create command with args */
 	}
-	return (-1);
+	return(EXIT_FAILURE);
 }
-/**
- * builtin - execute the built in function
- * @pgm: pgrm to execute
- *
- * Return: nothing
- */
-/* int built(char *pgm, char **envp, char **args) */
-/* { */
-/* 	printf("builtin()\n"); */
 
-/* 	(void) pgm; */
-/* 	(void) envp; */
-/* 	(void) args; */
+int builtcheck1(char *pgm, char **args,  char **envp)
+{
+	if (!_strcmp(pgm, "env") || !_strcmp(pgm, "printenv"))
+	{	_env(envp);
+		return (EXIT_SUCCESS);
+	}
+	if (!_strcmp(pgm, "getenv"))
+	{
+		_getenv(envp, args[1]);
+		return (0);
+	}
+	if (!_strcmp(pgm, "setenv"))
+	{
+		/* _setenv(); */
+		return (EXIT_SUCCESS);
+	}
+	if (!_strcmp(pgm, "unsetenv"))
+	{
+		/* _unsetenv(); */
+		return (EXIT_SUCCESS);
+	}
+	return (EXIT_FAILURE);
+}
+int builtcheck2(char *pgm, char **args, char **envp)
+{
+	(void) args;
+	(void) envp;
 
+	if (!_strcmp(pgm, "cd"))
+	{
+		/* _cd(); */
+		return (EXIT_SUCCESS);
+	}
+	if (!_strcmp(pgm, "alias"))
+	{
+		/* _alias(); */
+		return (EXIT_SUCCESS);
+	}
+	if (!_strcmp(pgm, "help"))
+	{
+		/* _help(); */
+		return (EXIT_SUCCESS);
+	}
+	if (!_strcmp(pgm, "history"))
+	{
+		/* _history(); */
+		return (EXIT_SUCCESS);
+	}
+	/* strcat args array to create command with args? */
 
-/* 	return (0); */
-/* } */
+	return (EXIT_FAILURE);
+}
 /**
  * _readfile() - read a text file containing command and execute them.
  * @file: file to read

@@ -24,6 +24,8 @@ char *_path(char **env);
 /* char *isbuiltin(char *arg, char **builtins); */
 int isbuilt(char **args, char **env, char **builtins, ssize_t builtslen);
 /* void builtin(char *pgm); */
+int builtcheck1(char *pgm, char **args, char **env);
+int builtcheck2(char *pgm, char **args, char **env);
 int built(char *pgm, char **env, char **args);
 void _readfile(char *file);
 char **parsepath(char **env);
