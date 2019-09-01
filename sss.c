@@ -15,21 +15,22 @@ int main(int ac, char **av, char **env)
 	unsigned int i = 0;
 	char *line = NULL;
 	size_t len = 0;
-	ssize_t read;
+	ssize_t read = 0;
 	char **input_args = NULL, **args = av;
-	char *builtins[] = {
-	"exit", "env", "setenv", "unsetenv",
-	"cd", "alias", "help", "history", NULL};
-	ssize_t builtinslen = 0;
+	char *builts[] = {
+		"exit", "env", "printenv", "setenv", "unsetenv",
+		"getenv", "cd", "alias", "help", "history", NULL};
+	ssize_t builtslen = 0;
 	/* ssize_t inputslen; */
-	/* char *builtin = NULL; */
+	/* char *builtpgm = NULL; */
+	/* int builtran = 0; */
 	(void) ac;
 
 	/* fp = STDIN_FILENO; */
 	fp = stdin;
 	if (args[1])
 		_readfile(args[1]);
-	builtinslen = sizeof(builtins) / sizeof(builtins[0]);
+	builtslen = sizeof(builts) / sizeof(builts[0]);
 	while (1)
 	{
 		type_prompt();
@@ -43,7 +44,12 @@ int main(int ac, char **av, char **env)
 		{
 			continue;
 		}
-		isbuiltin(input_args, builtins, builtinslen);
+		if (!isbuilt(input_args, env, builts, builtslen))
+		{
+			/* printf("\nin builtpgm\n"); */
+			/* if (builtpgm = EXIT_SUCCESS) */
+			continue;
+		}
 		_execute(line, input_args, env);
 	}
 	free(line);

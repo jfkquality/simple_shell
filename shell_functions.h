@@ -15,15 +15,16 @@ int getlen(char *s);
 void type_prompt(void);
 void sigintHandler(int signum);
 void _execute(char *line, char **args, char **envp);
-void _env(char **env);
+int _env(char **env);
 void _printenv(char **env);
 char **make_arr(ssize_t read, char *line);
 void check_input(ssize_t read, char *line);
-char *_getenv(char **env, char *evar);
+int _getenv(char **env, char *evar);
 char *_path(char **env);
 /* char *isbuiltin(char *arg, char **builtins); */
-char *isbuiltin(char **args, char **builtins, ssize_t builtslen);
-void builtin(char *pgm);
+int isbuilt(char **args, char **env, char **builtins, ssize_t builtslen);
+/* void builtin(char *pgm); */
+int built(char *pgm, char **env, char **args);
 void _readfile(char *file);
 char **parsepath(char **env);
 
