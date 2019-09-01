@@ -7,7 +7,7 @@
  *
  * Return: nothing
  */
-void _env(char **env)
+int _env(char **env)
 {
 	char **env1;
 
@@ -19,7 +19,8 @@ void _env(char **env)
 		write(STDOUT_FILENO, "\n", 1);
 		env1++;
 	}
-	exit(EXIT_SUCCESS);
+	return (EXIT_SUCCESS);
+	/* exit(EXIT_SUCCESS); */
 }
 
 /**
@@ -29,9 +30,17 @@ void _env(char **env)
  *
  * Return: char ptr to env var
  */
-char *_getenv(char **env, char *evar)
+int _getenv(char **env, char *evar)
 {
 	int i = 0;
+
+        if (!evar)
+        {
+                write (STDOUT_FILENO, "Usage ", 6);
+                write (STDOUT_FILENO, "getenv", 6);
+                write (STDOUT_FILENO, " <var-name>\n", 12);
+                return (EXIT_SUCCESS);
+        }
 
 	if (!_strchr(evar, '='))
 		_strcat(evar, "=");
@@ -39,10 +48,13 @@ char *_getenv(char **env, char *evar)
 	while (env[i])
 	{
 		if (_strncmp(evar, env[i], _strlen(evar)) == 0)
-			return (env[i]);
+		{
+			write(STDOUT_FILENO, env[i], _strlen(env[i]));
+			write(STDOUT_FILENO, "\n", 1);
+		}
 		i++;
 	}
-	exit(EXIT_FAILURE);
+	return (EXIT_SUCCESS);
 }
 
 /**
@@ -53,16 +65,7 @@ char *_getenv(char **env, char *evar)
  */
 void _printenv(char **env)
 {
-	/* unsigned int i = 0; */
-
-	/* while (env[i]) */
-	/* { */
-	/*	printf("%s\n", env[i]); */
-	/*	i++; */
-	/* } */
-	/* return (0); */
 	_env(env);
-	exit(EXIT_SUCCESS);
 }
 
 /**
@@ -91,5 +94,3 @@ void type_prompt(void)
 {
 	write(STDOUT_FILENO, "$ ", 2);
 }
-
-
