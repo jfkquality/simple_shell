@@ -8,6 +8,8 @@
 #include <sys/types.h>
 #include <sys/wait.h>
 #include <signal.h>
+#include <sys/stat.h>
+#include <fcntl.h>
 
 /* ssize_t _getline(char **lineptr, size_t *n, FILE *stream); */
 ssize_t _getline(char *buff);
@@ -27,7 +29,8 @@ int isbuilt(char **args, char **env, char **builtins, ssize_t builtslen);
 int builtcheck1(char *pgm, char **args, char **env);
 int builtcheck2(char *pgm, char **args, char **env);
 int built(char *pgm, char **env, char **args);
-void _readfile(char *file);
+/* void _readfile(char *file); */
+ssize_t _readfile(const char *filename);
 char **parsepath(char **env);
 
 extern int errno;

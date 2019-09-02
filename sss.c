@@ -21,6 +21,8 @@ int main(int ac, char **av, char **env)
 		"exit", "env", "printenv", "setenv", "unsetenv",
 		"getenv", "cd", "alias", "help", "history", NULL};
 	ssize_t builtslen = 0;
+	size_t filerows;
+	(void) filerows;
 	/* ssize_t inputslen; */
 	/* char *builtpgm = NULL; */
 	/* int builtran = 0; */
@@ -29,7 +31,18 @@ int main(int ac, char **av, char **env)
 	/* fp = STDIN_FILENO; */
 	fp = stdin;
 	if (args[1])
+	{
+		/* while (args[i]) */
+		/* { */
+		/* 	printf("args-%d %s\n", i, args[i]); */
+		/* 	printf("strlen args-%d, %d\n", i, _strlen(args[i])); */
+		/* 	i++; */
+		/* } */
+		/* return (0); */
 		_readfile(args[1]);
+
+		return (0);
+	}
 	builtslen = sizeof(builts) / sizeof(builts[0]);
 	while (1)
 	{

@@ -97,16 +97,34 @@ int builtcheck2(char *pgm, char **args, char **envp)
 }
 /**
  * _readfile - read a text file containing command and execute them.
- * @file: file to read
+ * @filename: file to read
  *
  * Return: success or failure
  */
-void _readfile(char *file)
+
+ssize_t _readfile(const char *filename) /* , size_t rows) */
 {
-	(void) file;
-	/* See lat project on file i/o */
-	/* Open file. Execute each command as is */
-	/* (void*) file; */
-	printf("_readfile()\n");
-	exit(EXIT_SUCCESS);
+        FILE *fp;
+        char *line = NULL;
+        size_t len = 0;
+        ssize_t read;
+	char **file_args = NULL;
+
+	if (!filename)
+		return (0);
+
+        /* fp = fopen("/etc/motd", "r"); */
+        fp = fopen(filename, "r");
+	if (fp == NULL)
+                exit(EXIT_FAILURE);
+
+        while ((read = getline(&line, &len, fp)) != -1)
+	{
+		file_args = make_arr(read, line);
+		if (!file_args)
+			continue;
+		_execute(line, file_args, NULL); /* env) */;
+        }
+        free(line);
+        return (EXIT_SUCCESS);
 }
