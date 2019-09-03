@@ -10,15 +10,19 @@
  *
  * Return: EXIT_SUCCESS or EXIT_FAILURE
  */
-int isbuilt(char **args, char **envp, char **builtins, ssize_t builtslen)
+int isbuilt(char **args, char **envp)
 {
 	int i = 0;
 	char *pgm = args[0];
+	char *builts[] = {
+		"exit", "env", "printenv", "setenv", "unsetenv",
+		"pgetenv", "cd", "alias", "help", "history", NULL};
+	ssize_t builtslen = sizeof(builts) / sizeof(builts[0]);
 	(void) builtslen;
 
-	while (builtins[i])
+	while (builts[i])
 	{
-		if (_strcmp(pgm, builtins[i]) == 0)
+		if (_strcmp(pgm, builts[i]) == 0)
 		{
 			if (!builtcheck1(pgm, args, envp))
 				return (EXIT_SUCCESS);

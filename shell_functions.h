@@ -26,13 +26,13 @@ void check_input(ssize_t read, char *line);
 char * _getenv(char **env, char *evar);
 int _pgetenv(char **env, char *evar);
 /* char *isbuiltin(char *arg, char **builtins); */
-int isbuilt(char **args, char **env, char **builtins, ssize_t builtslen);
+int isbuilt(char **args, char **env);
 /* void builtin(char *pgm); */
 int builtcheck1(char *pgm, char **args, char **env);
 int builtcheck2(char *pgm, char **args, char **env);
 int built(char *pgm, char **env, char **args);
 /* void _readfile(char *file); */
-ssize_t _readfile(const char *filename);
+ssize_t _readfile(const char *filename, char **);
 char *_getpath(char **arg, char **env);
 char **_paths(char **env);
 char **parsepaths(char *, char **);

@@ -17,7 +17,7 @@ void type_prompt(void)
  *
  * Return: success or failure
  */
-ssize_t _readfile(const char *filename)
+ssize_t _readfile(const char *filename, char **env)
 {
 	FILE *fp;
 	char *line = NULL;
@@ -38,7 +38,10 @@ ssize_t _readfile(const char *filename)
 		file_args = make_arr(read, line);
 		if (!file_args)
 			continue;
-		_execute(line, file_args, NULL);
+		if (!isbuilt(file_args, env))
+                        continue;
+                file_args[0] = _getpath(file_args, env);
+                _execute(line, file_args, env);
 	}
 	free(line);
 	return (EXIT_SUCCESS);
