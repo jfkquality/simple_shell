@@ -14,6 +14,7 @@ void type_prompt(void)
 /**
  * _readfile - read a text file containing command and execute them.
  * @filename: file to read
+ * @env: environment variables
  *
  * Return: success or failure
  */
@@ -39,9 +40,9 @@ ssize_t _readfile(const char *filename, char **env)
 		if (!file_args)
 			continue;
 		if (!isbuilt(file_args, env))
-                        continue;
-                file_args[0] = _getpath(file_args, env);
-                _execute(line, file_args, env);
+			continue;
+		file_args[0] = _getpath(file_args, env);
+		_execute(line, file_args, env);
 	}
 	free(line);
 	return (EXIT_SUCCESS);

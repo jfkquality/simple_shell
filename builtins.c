@@ -5,8 +5,6 @@
  * isbuilt - check if arg is a built-in and execute it
  * @args: args arry for builtin to check for
  * @envp: environment variable
- * @builtins: list of builtins
- * @builtslen: length of builtins array
  *
  * Return: EXIT_SUCCESS or EXIT_FAILURE
  */
