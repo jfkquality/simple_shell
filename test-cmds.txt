@@ -2,4 +2,4 @@ pwd
 /bin/pwd
 /bin/ls
 /bin/ps
-/bin/pwd
+/bin/ls -l

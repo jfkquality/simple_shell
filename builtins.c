@@ -2,21 +2,9 @@
 #include "shell_strings.h"
 
 /**
- * _path - reads and parses the PATH environment variable into an array
- * @env: environment variable
- *
- * Return: a path string
- */
-
-char *_path(char **env)
-{
-	(void) env;
-	return (EXIT_SUCCESS);
-}
-
-/**
  * isbuilt - check if arg is a built-in and execute it
  * @args: args arry for builtin to check for
+ * @envp: environment variable
  * @builtins: list of builtins
  * @builtslen: length of builtins array
  *
@@ -32,7 +20,6 @@ int isbuilt(char **args, char **envp, char **builtins, ssize_t builtslen)
 	{
 		if (_strcmp(pgm, builtins[i]) == 0)
 		{
-			/* printf("\nbuilt match %s\n\n", args[0]); */
 			if (!builtcheck1(pgm, args, envp))
 				return (EXIT_SUCCESS);
 			if (!builtcheck2(pgm, args, envp))
@@ -40,18 +27,36 @@ int isbuilt(char **args, char **envp, char **builtins, ssize_t builtslen)
 		}
 		i++;
 	}
-	return(EXIT_FAILURE);
+	return (EXIT_FAILURE);
 }
-
+/**
+ * builtcheck1 - check if arg is a built-in and execute it
+ * @pgm: pgm/cmd to find
+ * @args: args arry for builtin to check for
+ * @envp: environment variable
+ *
+ * Return: EXIT_SUCCESS or EXIT_FAILURE
+ */
 int builtcheck1(char *pgm, char **args,  char **envp)
 {
-	if (!_strcmp(pgm, "env") || !_strcmp(pgm, "printenv"))
-	{	_env(envp);
+	if (!_strcmp(pgm, "env"))
+	{
+		_env(envp);
+		return (EXIT_SUCCESS);
+	}
+	if (!_strcmp(pgm, "printenv"))
+	{
+		_env(envp);
 		return (EXIT_SUCCESS);
 	}
 	if (!_strcmp(pgm, "getenv"))
 	{
 		_getenv(envp, args[1]);
+		return (0);
+	}
+	if (!_strcmp(pgm, "pgetenv"))
+	{
+		_pgetenv(envp, args[1]);
 		return (0);
 	}
 	if (!_strcmp(pgm, "setenv"))
@@ -66,6 +71,14 @@ int builtcheck1(char *pgm, char **args,  char **envp)
 	}
 	return (EXIT_FAILURE);
 }
+/**
+ * builtcheck2 - check if arg is a built-in and execute it
+ * @pgm: pgm/cmd to find
+ * @args: args arry for builtin to check for
+ * @envp: environment variable
+ *
+ * Return: EXIT_SUCCESS or EXIT_FAILURE
+ */
 int builtcheck2(char *pgm, char **args, char **envp)
 {
 	(void) args;
@@ -94,37 +107,4 @@ int builtcheck2(char *pgm, char **args, char **envp)
 	/* strcat args array to create command with args? */
 
 	return (EXIT_FAILURE);
-}
-/**
- * _readfile - read a text file containing command and execute them.
- * @filename: file to read
- *
- * Return: success or failure
- */
-
-ssize_t _readfile(const char *filename) /* , size_t rows) */
-{
-        FILE *fp;
-        char *line = NULL;
-        size_t len = 0;
-        ssize_t read;
-	char **file_args = NULL;
-
-	if (!filename)
-		return (0);
-
-        /* fp = fopen("/etc/motd", "r"); */
-        fp = fopen(filename, "r");
-	if (fp == NULL)
-                exit(EXIT_FAILURE);
-
-        while ((read = getline(&line, &len, fp)) != -1)
-	{
-		file_args = make_arr(read, line);
-		if (!file_args)
-			continue;
-		_execute(line, file_args, NULL); /* env) */;
-        }
-        free(line);
-        return (EXIT_SUCCESS);
 }

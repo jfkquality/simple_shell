@@ -1,4 +1,3 @@
-
 #include "shell_functions.h"
 #include "shell_strings.h"
 
@@ -13,7 +12,7 @@ int _strcmp(char *s1, char *s2)
 	char *src1 = s1;
 	char *src2 = s2;
 
-	for (; *src1 != '\0' && *src2 != '\0'; src1++, src2++)
+	for (; *src1 != '\0' || *src2 != '\0'; src1++, src2++)
 	{
 		if (*src1 != *src2)
 			return (*src1 - *src2);

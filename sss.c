@@ -13,34 +13,20 @@ int main(int ac, char **av, char **env)
 {
 	FILE *fp;
 	unsigned int i = 0;
-	char *line = NULL;
 	size_t len = 0;
-	ssize_t read = 0;
+	ssize_t read = 0, builtslen = 0;
 	char **input_args = NULL, **args = av;
+	char *line = NULL;
 	char *builts[] = {
 		"exit", "env", "printenv", "setenv", "unsetenv",
-		"getenv", "cd", "alias", "help", "history", NULL};
-	ssize_t builtslen = 0;
-	size_t filerows;
-	(void) filerows;
-	/* ssize_t inputslen; */
-	/* char *builtpgm = NULL; */
-	/* int builtran = 0; */
+		"pgetenv", "cd", "alias", "help", "history", NULL};
 	(void) ac;
 
 	/* fp = STDIN_FILENO; */
 	fp = stdin;
 	if (args[1])
 	{
-		/* while (args[i]) */
-		/* { */
-		/* 	printf("args-%d %s\n", i, args[i]); */
-		/* 	printf("strlen args-%d, %d\n", i, _strlen(args[i])); */
-		/* 	i++; */
-		/* } */
-		/* return (0); */
 		_readfile(args[1]);
-
 		return (0);
 	}
 	builtslen = sizeof(builts) / sizeof(builts[0]);
@@ -49,20 +35,13 @@ int main(int ac, char **av, char **env)
 		type_prompt();
 		signal(SIGINT, sigintHandler);
 		read = getline(&line, &len, fp);
-		if (read == 1)
-			continue;
 		check_input(read, line);
 		input_args = make_arr(read, line);
 		if (!input_args)
-		{
 			continue;
-		}
 		if (!isbuilt(input_args, env, builts, builtslen))
-		{
-			/* printf("\nin builtpgm\n"); */
-			/* if (builtpgm = EXIT_SUCCESS) */
 			continue;
-		}
+		input_args[0] = _getpath(input_args, env);
 		_execute(line, input_args, env);
 	}
 	free(line);

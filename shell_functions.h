@@ -10,6 +10,8 @@
 #include <signal.h>
 #include <sys/stat.h>
 #include <fcntl.h>
+#include "shell_functions.h"
+#include "shell_strings.h"
 
 /* ssize_t _getline(char **lineptr, size_t *n, FILE *stream); */
 ssize_t _getline(char *buff);
@@ -21,8 +23,8 @@ int _env(char **env);
 void _printenv(char **env);
 char **make_arr(ssize_t read, char *line);
 void check_input(ssize_t read, char *line);
-int _getenv(char **env, char *evar);
-char *_path(char **env);
+char * _getenv(char **env, char *evar);
+int _pgetenv(char **env, char *evar);
 /* char *isbuiltin(char *arg, char **builtins); */
 int isbuilt(char **args, char **env, char **builtins, ssize_t builtslen);
 /* void builtin(char *pgm); */
@@ -31,7 +33,10 @@ int builtcheck2(char *pgm, char **args, char **env);
 int built(char *pgm, char **env, char **args);
 /* void _readfile(char *file); */
 ssize_t _readfile(const char *filename);
-char **parsepath(char **env);
+char *_getpath(char **arg, char **env);
+char **_paths(char **env);
+char **parsepaths(char *, char **);
+char *_which(char *pgm, char **paths);
 
 extern int errno;
 

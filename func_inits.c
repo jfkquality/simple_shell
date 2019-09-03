@@ -78,7 +78,7 @@ char **make_arr(ssize_t read, char *line)
 		free(line);
 		exit(EXIT_FAILURE);
 	}
-	toklen = getlen(token);
+	toklen = _strlen(token);
 	arr[i] = malloc((toklen) * sizeof(char));
 	if (arr[i] == NULL)
 	{
@@ -91,7 +91,7 @@ char **make_arr(ssize_t read, char *line)
 	while ((token = strtok(NULL, " \n")))
 	{
 		i++;
-		toklen = getlen(token);
+		toklen = _strlen(token);
 		arr[i] = malloc((toklen) * sizeof(char));
 		if (arr[i] == NULL)
 		{
@@ -138,6 +138,8 @@ void _execute(char *line, char **args, char **envp)
 	}
 	if (child_pid == 0)
 	{
+		/* cmdout = _which(cmdout, envp); */
+
 		if (execve(args[0], args, envp) == -1)
 		{
 			perror("Error:");
