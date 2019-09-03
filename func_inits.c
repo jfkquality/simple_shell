@@ -50,7 +50,7 @@ void check_input(ssize_t read, char *line)
 		write(STDOUT_FILENO, "\n", 1);
 		exit(EXIT_SUCCESS);
 	}
-	if (strcmp(line, "exit\n") == 0)
+	if (_strcmp(line, "exit\n") == 0)
 	{
 		free(line);
 		exit(EXIT_SUCCESS);

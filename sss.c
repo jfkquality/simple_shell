@@ -14,7 +14,7 @@ int main(int ac, char **av, char **env)
 	FILE *fp;
 	unsigned int i = 0;
 	size_t len = 0;
-	ssize_t read = 0;
+	ssize_t read = 1;
 	char **input_args = NULL, **args = av;
 	char *line = NULL;
 	(void) ac;
@@ -26,11 +26,12 @@ int main(int ac, char **av, char **env)
 		_readfile(args[1], env);
 		return (0);
 	}
-	while (1)
+	while (read)
 	{
 		type_prompt();
 		signal(SIGINT, sigintHandler);
 		read = getline(&line, &len, fp);
+		/* read = getline(&line, &len, fp); */
 		check_input(read, line);
 		input_args = make_arr(read, line);
 		if (!input_args)
